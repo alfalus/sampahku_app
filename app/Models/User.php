@@ -17,12 +17,19 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    // ];
+    protected $table = 'user';
+    protected $primaryKey = 'id_user';
+    public $timestamps = false;
+    
+    protected $guarded = [
+        'id'
     ];
-
+    // DB::table("users")->insert(["name" => "aldo", "email" => "aldo@gmail.com", "password" => "$2y$10$ViBgi.bXJZx4fxlV/SUZs.2jm9MuaCKlZKZ2kS4araNlm/GY8u8XO","create"])
     /**
      * The attributes that should be hidden for serialization.
      *

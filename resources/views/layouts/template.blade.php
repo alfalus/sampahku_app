@@ -4,7 +4,7 @@
 	<!--begin::Head-->
 	<head><base href="../../">
 		<meta charset="utf-8" />
-		<title>SampahKu | @yield('title')</title>
+		<title>@yield('title') | SampahKu </title>
 		<meta name="description" content="Page with empty content" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -15,7 +15,7 @@
 		@yield('css')
 		
 		<!--begin::Page Vendors Styles(used by this page)-->
-		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+		{{-- <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" /> --}}
 		<!--end::Page Vendors Styles-->
 		<!--begin::Global Theme Styles(used by all pages)-->
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
@@ -60,6 +60,7 @@
 							<!--begin::Container-->
 							<div class="container">
 								<p>Page content goes here...</p>
+								<p>skada</p>
 								@yield('content')
 							</div>
 							<!--end::Container-->
