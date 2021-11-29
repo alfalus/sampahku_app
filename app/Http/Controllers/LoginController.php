@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index(){
-        if(Auth::check())
-        {
+        if(Auth::check()) {
             return redirect()->intended('dashboard');
         } else {
             return view('login');
@@ -26,7 +25,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended('profil');
         }
 
         return back()->withErrors([

@@ -28,6 +28,10 @@ class RoleSeeder extends Seeder
             [
                 'role' => 'warga',
                 'deskripsi' => 'admin warga'
+            ], 
+            [
+                'role' => 'super admin',
+                'deskripsi' => 'god of admin'
             ]]
         );
         

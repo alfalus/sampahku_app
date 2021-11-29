@@ -139,6 +139,7 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'auth' => 'Anda tidak dapat melakukan permintaan ini.'
     ],
 
     /*

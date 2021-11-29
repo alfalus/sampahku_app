@@ -22,7 +22,10 @@ class DataUserFactory extends Factory
     public function definition()
     {
         return [
-            //
+            // 'id_data_user' => $this->faker->numerify('item-###'),
+            // 'nama_kategori' => $this->faker->word(),
+            // 'harga_jual_warga' => $this->faker->randomNumber(4, true),
+            // 'harga_jual_rt' => $this->faker->randomNumber(4, true)
         ];
     }
 }
