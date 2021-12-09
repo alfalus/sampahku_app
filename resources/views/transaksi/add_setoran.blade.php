@@ -13,6 +13,7 @@ $user = auth()->user();
 @endsection
 
 @section('content')
+    {{ dd(session()->all()) }}
     <div class="row" data-sticky-container="">
         <div class="col-lg-8">
 
@@ -37,7 +38,7 @@ $user = auth()->user();
                         {{-- <h3 class="font-size-lg text-dark font-weight-bold mb-6">1. Customer Info:</h3> --}}
                         <div class="mb-15">
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label text-right">Pilih Nasabah:</label>
+                                <label class="col-xl-3 col-lg-3 col-form-label">Pilih Nasabah</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <select class="form-control form-control-solid selectpicker" name="nasabah" id="nasabah"
                                         data-live-search="true" title="pilih nasabah">
@@ -50,7 +51,28 @@ $user = auth()->user();
                                 <span class="font-size-sm text-danger"><em>(*Isi dalam satuan Kilogram)</em></span>
                             </h3>
 
-                            <div class="form-group row">
+
+
+                            @foreach ($data as $item)
+
+                                <div class="form-group row">
+                                    <label
+                                        class="col-xl-3 col-lg-3 col-form-label">{{ ucwords($item['nama_kategori']) }}</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <div class="input-group">
+                                            <input type="text" name="item_{{ $item['nama_kategori'] }}"
+                                                class="form-control form-control-lg- form-control-solid- "
+                                                aria-describedby="basic-addon2" maxlength="5" value=""
+                                                harga="{{ $item['harga'] }}" nama-item="{{ $item['nama_kategori'] }}" />
+                                            <div class="  input-group-append">
+                                                <span class="input-group-text">Kg</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            {{-- <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Botol:</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
@@ -62,9 +84,9 @@ $user = auth()->user();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Kaleng:</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
@@ -76,9 +98,9 @@ $user = auth()->user();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Emberan:</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
@@ -90,9 +112,9 @@ $user = auth()->user();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Putihan:</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
@@ -104,9 +126,9 @@ $user = auth()->user();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Kardus:</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
@@ -118,9 +140,9 @@ $user = auth()->user();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Bounces:</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
@@ -132,9 +154,9 @@ $user = auth()->user();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Kayu:</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
@@ -146,9 +168,9 @@ $user = auth()->user();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Besi:</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group">
@@ -160,21 +182,22 @@ $user = auth()->user();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="separator separator-dashed my-10"></div>
 
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label text-right">Hitung Penjualan:</label>
+                                <label class="col-lg-3 col-form-label">Hitung Penjualan</label>
                                 <div class="col-lg-6">
-                                    <input type="text" name="total_penjualan"
-                                        class="form-control form-control-solid col-lg-3-" placeholder="Rp" readonly />
+                                    <input type="text" name="total_penjualan" id="total_penjualan"
+                                        class="form-control form-control-solid col-lg-3-" placeholder="Rp" readonly
+                                        value="" />
                                     <span class="text-muted font-size-sm">Harga item sewaktu-waktu dapat berubah</span>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label text-right">Pilihan Pembayaran:</label>
+                                <label class="col-xl-3 col-lg-3 col-form-label">Pilihan Pembayaran</label>
                                 <div class="col-lg-9 col-xl-6 col-form-label">
                                     <div class="radio-inline">
                                         <label class="radio radio-primary">
@@ -192,19 +215,24 @@ $user = auth()->user();
                     </div>
                 </form>
                 <div class="card-footer text-right">
-                    <a href="{{ url('/profil') }}" class="btn btn-light-primary font-weight-bolder mr-2">
-                        <i class="ki ki-long-arrow-back icon-sm"></i>Kembali
-                    </a>
-                    <button type="submit" onclick="document.getElementById('form_add').submit()"
-                        class="btn btn-primary font-weight-bolder">
-                        <i class="ki ki-check icon-sm"></i>Setor
-                    </button>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url('/transaksi/setoran') }}" class="btn btn-light-primary font-weight-bolder mr-2">
+                            <i class="ki ki-long-arrow-back icon-sm"></i>Kembali
+                        </a>
+                        <div>
+                            <button id="btn_review" class="btn btn-outline-primary w-100px" data-toggle="modal-"
+                                data-target="#modal_review-">
+                                <i class="flaticon-eye"></i> Review
+                            </button>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-4">
 
+        <div class="col-lg-4">
             <div class="card card-custom card-stretch gutter-b sticky" id="" data-sticky="true" data-sticky-for="1023"
                 data-sticky-class="sticky" data-margin-top="140px">
                 <div class="card-header border-1">
@@ -219,119 +247,100 @@ $user = auth()->user();
                         <table class="table table-borderless mb-0">
                             <tbody id="tbody">
 
-                                <!--begin::Item-->
-                                {{-- <tr>
-                                    <td class="w-40px align-middle pb-6 pl-0 pr-2">
-                                        <div class="symbol symbol-40 symbol-light-success">
-                                            <span class="symbol-label">
-                                                <span class="svg-icon svg-icon-lg svg-icon-success">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                        height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24" />
-                                                            <path
-                                                                d="M12,4.56204994 L7.76822128,9.6401844 C7.4146572,10.0644613 6.7840925,10.1217854 6.3598156,9.76822128 C5.9355387,9.4146572 5.87821464,8.7840925 6.23177872,8.3598156 L11.2317787,2.3598156 C11.6315738,1.88006147 12.3684262,1.88006147 12.7682213,2.3598156 L17.7682213,8.3598156 C18.1217854,8.7840925 18.0644613,9.4146572 17.6401844,9.76822128 C17.2159075,10.1217854 16.5853428,10.0644613 16.2317787,9.6401844 L12,4.56204994 Z"
-                                                                fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                            <path
-                                                                d="M3.5,9 L20.5,9 C21.0522847,9 21.5,9.44771525 21.5,10 C21.5,10.132026 21.4738562,10.2627452 21.4230769,10.3846154 L17.7692308,19.1538462 C17.3034221,20.271787 16.2111026,21 15,21 L9,21 C7.78889745,21 6.6965779,20.271787 6.23076923,19.1538462 L2.57692308,10.3846154 C2.36450587,9.87481408 2.60558331,9.28934029 3.11538462,9.07692308 C3.23725479,9.02614384 3.36797398,9 3.5,9 Z M12,17 C13.1045695,17 14,16.1045695 14,15 C14,13.8954305 13.1045695,13 12,13 C10.8954305,13 10,13.8954305 10,15 C10,16.1045695 10.8954305,17 12,17 Z"
-                                                                fill="#000000" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="font-size-lg font-weight-bolder text-dark-75 align-middle w-150px pb-6">
-                                        Top Authors</td>
-                                    <td class="font-weight-bolder font-size-lg text-dark-75 text-right align-middle pb-6">
-                                        5.4MB</td>
-                                </tr>
-                                <tr>
-                                    <td class="w-40px pb-6 pl-0 pr-2">
-                                        <div class="symbol symbol-40 symbol-light-danger align-middle">
-                                            <span class="symbol-label">
-                                                <span class="svg-icon svg-icon-lg svg-icon-danger">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                        height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24" />
-                                                            <rect fill="#000000" x="4" y="4" width="7" height="7"
-                                                                rx="1.5" />
-                                                            <path
-                                                                d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                                fill="#000000" opacity="0.3" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="font-size-lg font-weight-bolder text-dark-75 w-150px align-middle pb-6">
-                                        Popular Authors</td>
-                                    <td class="font-weight-bolder font-size-lg text-dark-75 text-right align-middle pb-6">
-                                        2.8MB</td>
-                                </tr>
-                                <tr>
-                                    <td class="w-40px pb-6 pl-0 pr-2">
-                                        <div class="symbol symbol-40 symbol-light-primary align-middle">
-                                            <span class="symbol-label">
-                                                <span class="svg-icon svg-icon-lg svg-icon-primary">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                        height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                                            <path
-                                                                d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z"
-                                                                fill="#000000" fill-rule="nonzero" opacity="0.3" />
-                                                            <path
-                                                                d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z"
-                                                                fill="#000000" fill-rule="nonzero" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="font-size-lg font-weight-bolder text-dark-75 w-150px align-middle pb-6">
-                                        New Users</td>
-                                    <td class="font-weight-bolder font-size-lg text-dark-75 text-right align-middle pb-6">
-                                        1.5MB</td>
-                                </tr>
-                                <tr>
-                                    <td class="w-40px pl-0 pr-2">
-                                        <div class="symbol symbol-40 symbol-light-warning align-middle">
-                                            <span class="symbol-label">
-                                                <span class="svg-icon svg-icon-lg svg-icon-warning">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                        height="24px" viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24" height="24" />
-                                                            <path
-                                                                d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z"
-                                                                fill="#000000" />
-                                                            <rect fill="#000000" opacity="0.3"
-                                                                transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)"
-                                                                x="16.3255682" y="2.94551858" width="3" height="18"
-                                                                rx="1" />
-                                                        </g>
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="font-size-lg font-weight-bolder text-dark-75 w-150px align-middle">Active
-                                        Customers</td>
-                                    <td class="font-weight-bolder font-size-lg text-dark-75 text-right align-middle">
-                                        890KB</td>
-                                </tr> --}}
                             </tbody>
                         </table>
                     </div>
                     <!--end::Table-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal-->
+    <div class="modal fade" id="modal_review" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdrop" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Review Setoran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <td class="border-top-0 w-5">User</td>
+                            <td class="border-top-0">: <span id="user_setor"></td>
+                        </tr>
+                        <tr>
+                            <td class="border-top-0 w-50-">Metode</td>
+                            <td class="border-top-0">: <span id="metode_bayar"></span></td>
+                        </tr>
+                    </table>
+                    <div class="separator separator-dashed my-5"></div>
+                    <table class="table border-1" id="tabel_review">
+                        <thead>
+                            <th class="">Kategori</th>
+                            <th class="text-center">Item x harga</th>
+                            <th class="text-center">Sub Total</th>
+                        </thead>
+                        <tbody>
+                            {{-- <tr>
+                                <td class="border-top-0">Botol</td>
+                                <td class="border-top-0 text-center">1 kg x Rp 8.313</td>
+                                <td class="border-top-0 text-center"><strong> Rp 8.313</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0">Kaleng</td>
+                                <td class="border-top-0 text-center">1 kg x Rp 8.313</td>
+                                <td class="border-top-0 text-center"><strong> Rp 10.818</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0">Emberan</td>
+                                <td class="border-top-0">1 kg</td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0">Putihan</td>
+                                <td class="border-top-0">1 kg</td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0">Kardus</td>
+                                <td class="border-top-0">1 kg</td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0">Bounces</td>
+                                <td class="border-top-0">1 kg</td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0">Kayu</td>
+                                <td class="border-top-0">1 kg</td>
+                            </tr>
+                            <tr>
+                                <td class="border-top-0">Besi</td>
+                                <td class="border-top-0">1 kg</td>
+                            </tr> --}}
+                        </tbody>
+                        <tfoot class="mt-5">
+                            <tr>
+                                <td colspan="2" class="text-right border-1- ">
+                                    <h4> Total</h4>
+                                </td>
+                                <td class="text-center"><strong> Rp <span id="total_nominal"></span></strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <a href="javascript:;" class="btn btn-light-primary font-weight-bolder mr-2 text-left"
+                        data-dismiss="modal">
+                        <i class="ki ki-long-arrow-back icon-sm"></i>Kembali
+                    </a>
+                    <button type="submit" onclick="document.getElementById('form_add').submit()"
+                        class="btn btn-primary font-weight-bolder px-10- w-100px">
+                        <i class="ki ki-check icon-sm"></i>Setor
+                    </button>
                 </div>
             </div>
         </div>
@@ -354,7 +363,7 @@ $user = auth()->user();
             });
 
             $.ajax({
-                url: 'api/user/getNasabah/{!! $user->id_role !!}',
+                url: 'api/user/getNasabah/{!! $user->id_user !!}',
                 type: 'get',
                 success: function(result) {
                     if (result.status == 'ok') {
@@ -383,7 +392,7 @@ $user = auth()->user();
                                 <tr>
                                     <td class="w-40px align-middle pb-2 pl-0 pr-2">
                                         <div class="symbol symbol-50 symbol-light-success">
-																		<div class="symbol-label" style="background-image: url('assets/media/stock-600x400/img-5.jpg')"></div>
+																		<div class="symbol-label" style="background-image: url('assets/media/stock-600x400/img-35.jpg')"></div>
 																	</div>
                                     </td>
                                     <td class="font-size-md font-weight-bold text-dark-75 align-middle w-150px pb-2">
@@ -401,7 +410,70 @@ $user = auth()->user();
 
                     }
                 }
-            })
+            });
+
+            let hitungPenjualan = 0;
+            $("input[name*='item_']").on('keyup', function() {
+                var berat = $(this).val();
+                var harga = $(this).attr('harga');
+                var total = berat * harga;
+                if (berat > 0) {
+                    hitungPenjualan += total;
+                }
+                $("#btn_review").trigger('change');
+            });
+
+            $("#btn_review").on('click change', function(e) {
+
+                if ($("#nasabah").val() == '' && !e.isTrigger) {
+                    alert('Nasabah penyetor harus dipilih');
+                    return;
+                }
+
+                var input = $("input[name*='item_']");
+                var count = 0;
+                $.each(input, function(i, val) {
+                    var hitung = $(val).val();
+                    if (hitung) {
+                        count++;
+                    }
+                });
+                if (count == 0) {
+                    alert('Data tidak lengkap');
+                } else {
+
+                    $("#tabel_review > tbody").empty();
+                    $("#user_setor").html($("#nasabah").text());
+                    $("#metode_bayar").html($("input[name=tipe_bayar]:checked").val());
+
+                    var grandTotal = 0;
+                    $.each(input, function(i, val) {
+                        var harga = parseInt($(val).attr("harga"));
+                        var item = $(val).attr("nama-item");
+                        var berat = $(val).val();
+                        var total = berat * harga;
+                        grandTotal += total;
+                        if (berat) {
+                            var $tr = $("<tr>" +
+                                `<td class="border-top-0">` + item + `</td>
+                            <td class="border-top-0 text-center">` + berat + ` kg x Rp ` + harga.toLocaleString('id') + `</td>
+                            <td class="border-top-0 text-center"><strong> Rp ` + total.toLocaleString('id') +
+                                `</strong></td>` +
+                                "</tr>");
+
+                            $("#tabel_review > tbody:last").append($tr);
+                        }
+                        $("#total_nominal").html(grandTotal.toLocaleString('id'));
+                        $("#total_penjualan").val(grandTotal);
+
+                    });
+
+                    if (!e.isTrigger) {
+                        $("#modal_review").modal('show');
+                    }
+                }
+
+            });
 
         });
     </script>

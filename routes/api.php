@@ -22,3 +22,5 @@ use App\Http\Controllers\Api\ApiController;
 
 Route::get('/user/getNasabah/{id}',[ApiController::class, 'getNasabah']);
 Route::get('/user/getPrice/{id}',[ApiController::class, 'getPrice']);
+Route::post('/user/getSatpel',[ApiController::class, 'getSatpel'])->name('getSatpel');
+Route::post('/user/getBanksampah',[ApiController::class, 'getBanksampah'])->name('getBanksampah');

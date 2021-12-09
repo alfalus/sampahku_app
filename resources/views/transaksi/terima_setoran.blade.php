@@ -329,6 +329,8 @@ $user = auth()->user();
                             {{-- <div class="text-muted pt-2 font-size-sm">custom colu rendering</div> --}}
                         </h3>
                     </div>
+
+                    {{-- @section('custom_toolbar') --}}
                     <div class="card-toolbar">
                         <!--begin::Dropdown-->
                         <div class="dropdown dropdown-inline mr-2">
@@ -357,8 +359,8 @@ $user = auth()->user();
                                     <li
                                         class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
                                         Choose an option:</li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link">
+                                    <li class="navi-item" id="export_print">
+                                        <a href="javascript:;" class="navi-link" id="export_print">
                                             <span class="navi-icon">
                                                 <i class="la la-print"></i>
                                             </span>
@@ -366,7 +368,7 @@ $user = auth()->user();
                                         </a>
                                     </li>
                                     <li class="navi-item">
-                                        <a href="#" class="navi-link">
+                                        <a href="javascript:;" class="navi-link" id="export_copy">
                                             <span class="navi-icon">
                                                 <i class="la la-copy"></i>
                                             </span>
@@ -374,7 +376,7 @@ $user = auth()->user();
                                         </a>
                                     </li>
                                     <li class="navi-item">
-                                        <a href="#" class="navi-link">
+                                        <a href="javascript:;" class="navi-link">
                                             <span class="navi-icon">
                                                 <i class="la la-file-excel-o"></i>
                                             </span>
@@ -382,7 +384,7 @@ $user = auth()->user();
                                         </a>
                                     </li>
                                     <li class="navi-item">
-                                        <a href="#" class="navi-link">
+                                        <a href="javascript:;" class="navi-link" id="export_excel">
                                             <span class="navi-icon">
                                                 <i class="la la-file-text-o"></i>
                                             </span>
@@ -390,7 +392,7 @@ $user = auth()->user();
                                         </a>
                                     </li>
                                     <li class="navi-item">
-                                        <a href="#" class="navi-link">
+                                        <a href="javascript:;" class="navi-link" id="export_pdf">
                                             <span class="navi-icon">
                                                 <i class="la la-file-pdf-o"></i>
                                             </span>
@@ -407,11 +409,13 @@ $user = auth()->user();
                         <a href="{{ url('/transaksi/setoran/add') }}">
                             <button class="btn btn-primary" title="Tambah user baru">
                                 <i class="fas fa-plus"></i>
-                                Setoran Baru
+                                Penerimaan Baru
                             </button>
                         </a>
                         <!--end::Button-->
                     </div>
+                    {{-- @endsection --}}
+
                 </div>
                 <div class="card-body">
                     <!--begin: Datatable-->
@@ -427,94 +431,24 @@ $user = auth()->user();
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $item['nama'] }}</td>
+                                    <td>{{ $item['tanggal'] }}</td>
+                                    <td>{{ $item['total_jual'] }}</td>
+                                    <td>{{ $item['bobot'] }}</td>
+                                    <td>{{ $item['deskripsi'] }}</td>
+                                    <td></td>
+                                </tr>
+                            @endforeach
+                            {{-- <tr>
+                                <td>Aldo Alfalus</td>
                                 <td>10 Nov 2021#10:43:00</td>
-                                <td>Hayes Boule</td>
-                                <td>Casper-Kerluke</td>
-                                <td>5</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>10 Jun 2021#10:43:00</td>
-                                <td>Humbert Bresnen</td>
-                                <td>Hodkiewicz and Sons</td>
-                                <td>2</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Jareb Labro</td>
-                                <td>Kuhlman Inc</td>
-                                <td>6</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Krishnah Tosspell</td>
-                                <td>Prosacco-Kessler</td>
-                                <td>1</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Dale Kernan</td>
-                                <td>Bernier and Sons</td>
-                                <td>5</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Halley Bentham</td>
-                                <td>Schoen-Metz</td>
-                                <td>1</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Burgess Penddreth</td>
-                                <td>DuBuque, Stanton and Stanton</td>
-                                <td>5</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Cob Sedwick</td>
-                                <td>Homenick-Nolan</td>
-                                <td>3</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Tabby Callaghan</td>
-                                <td>Daugherty-Considine</td>
+                                <td>51.700</td>
+                                <td>8 Kg</td>
                                 <td>2</td>
                                 <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Broddy Jarry</td>
-                                <td>Walter Group</td>
-                                <td>1</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>10 Nov 2021#10:43:00</td>
-                                <td>Broddy Jarry</td>
-                                <td>Walter Group</td>
-                                <td>1</td>
-                                <td nowrap="nowrap"></td>
-                            </tr>
+                            </tr> --}}
 
                         </tbody>
                     </table>
@@ -529,7 +463,7 @@ $user = auth()->user();
 @endsection
 
 @push('scripts')
-    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="assets/js/pages/crud/datatables/advanced/terima-setoran.js"></script>
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/crud/datatables/advanced/terima-setoran.js') }}"></script>
 
 @endpush

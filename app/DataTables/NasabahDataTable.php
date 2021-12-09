@@ -57,12 +57,12 @@ class NasabahDataTable extends DataTable
                     ->setTableId('nasabah-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->dom('Bfrtip')
+                    // ->dom('Bfrtip')
                     ->orderBy(1)
                     ->parameters([
                         'responsive' => true,
                         'autoWidth' => false,
-                        'buttons' => ['export'],
+                        // 'buttons' => ['export'],
                     ]);
                     // ->buttons(
                     //     Button::make('export'),

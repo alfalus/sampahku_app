@@ -5,7 +5,8 @@
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
         <a href="index.html" class="brand-logo">
-            <img alt="Logo" src="assets/media/logos/logo-light.png" />
+            <img alt="Logo" src="assets/media/logos/sampahku_logo.png" />
+            <span></span>
         </a>
         <!--end::Logo-->
         <!--begin::Toggle-->
@@ -42,7 +43,7 @@
                 <li class="menu-item" aria-haspopup="true">
                     <a href="/dashboard" class="menu-link">
                         <i class="menu-icon fas fa-tachometer-alt"></i>
-                        <span class="menu-text">Dashboard</span>
+                        <span class="menu-text">Beranda</span>
                     </a>
                 </li>
 
@@ -83,7 +84,7 @@
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Terima Pembelian Warga</span>
+                                    <span class="menu-text">Pembelian</span>
                                 </a>
                             </li>
                         </ul>
@@ -194,7 +195,7 @@
                     aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <i class="menu-icon fas fa-users"></i>
-                        <span class="menu-text">Manajemen User</span>
+                        <span class="menu-text">Manajemen Pengguna</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="menu-submenu">

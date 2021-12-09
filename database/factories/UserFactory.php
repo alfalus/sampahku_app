@@ -23,7 +23,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'id_role' => $this->faker->numberBetween(1,3),
+            'id_role' => $this->faker->numberBetween(1,4),
             'email' => $this->faker->unique()->freeEmail(),
             'password' => bcrypt('admin'), // password
             'tanggal_dibuat' => now(),

@@ -20,11 +20,6 @@ class Sampah extends Migration
             $table->integer('harga_jual_rt');
         });
 
-        // Schema::table('sampah', function (Blueprint $table) {
-        //     $table->foreign('id_user')->references('id_user')->on('order_jual');
-        //     $table->foreign('id_relasi_user')->references('id_user')->on('order_jual');
-        //     // $table->foreign('id_dompet')->references('id_dompet')->on('dompet');
-        // });
     }
 
     /**

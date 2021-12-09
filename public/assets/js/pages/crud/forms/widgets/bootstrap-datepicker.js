@@ -34,7 +34,7 @@ var KTBootstrapDatepicker = function () {
         });
 
         // input group layout 
-        $('#kt_datepicker_2, #kt_datepicker_2_validate').datepicker({
+        $('#tgl_lahir, #tgl_lahir_validate').datepicker({
             rtl: KTUtil.isRTL(),
             todayHighlight: true,
             orientation: "bottom left",

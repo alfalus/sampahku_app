@@ -28,9 +28,10 @@
         </div>
         <!--end::Info-->
         @hasSection('custom_toolbar')
-            ok
+            {{-- ok --}}
+            @yield('custom_toolbar')
         @else
-            <!--begin::Toolbar-->
+            {{-- <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Actions-->
                 <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">Actions</a>
@@ -110,7 +111,7 @@
                 </div>
                 <!--end::Dropdown-->
             </div>
-            <!--end::Toolbar-->
+            <!--end::Toolbar--> --}}
         @endif
     </div>
 </div>

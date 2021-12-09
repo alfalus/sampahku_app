@@ -7,7 +7,7 @@
             <!--begin::Header Menu-->
             <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
                 <!--begin::Header Nav-->
-                <ul class="menu-nav">
+                {{-- <ul class="menu-nav">
                     <li class="menu-item menu-item-submenu menu-item-rel menu-item-active" data-menu-toggle="click"
                         aria-haspopup="true">
                         <a href="javascript:;" class="menu-link menu-toggle">
@@ -727,7 +727,7 @@
                             </ul>
                         </div>
                     </li>
-                </ul>
+                </ul> --}}
                 <!--end::Header Nav-->
             </div>
             <!--end::Header Menu-->
@@ -735,7 +735,7 @@
         <!--end::Header Menu Wrapper-->
         <!--begin::Topbar-->
         <div class="topbar">
-            <!--begin::Search-->
+            {{-- <!--begin::Search-->
             <div class="dropdown" id="kt_quick_search_toggle">
                 <!--begin::Toggle-->
                 <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
@@ -1550,20 +1550,32 @@
                     </span>
                 </div>
             </div>
-            <!--end::Chat-->
+            <!--end::Chat--> --}}
 
+            <!--begin::dompet -->
+            <div class="topbar-item">
+                <div class="mr-5 d-flex ">
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-wallet mr-3 text-primary"></i>
+
+                    </div>
+                    <div>
+                        <strong>Rp 75.000</strong>
+                    </div>
+
+                </div>
+            </div>
             <!--begin::User-->
             <div class="topbar-item">
                 <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
                     id="kt_quick_user_toggle">
-                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                    <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi, </span>
                     <span
-                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ auth()->user()->nama_user }}</span>
-                    @php
-                        // dd(auth()->user());
-                    @endphp
+                        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ session('nama') }}</span>
+
                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                        <span class="symbol-label font-size-h5 font-weight-bold">S</span>
+                        <span
+                            class="symbol-label font-size-h5 font-weight-bold">{{ substr(session('nama'), 0, 1) }}</span>
                     </span>
                 </div>
             </div>
@@ -1574,3 +1586,6 @@
     <!--end::Container-->
 </div>
 <!--end::Header-->
+@php
+// dd(auth()->user());
+@endphp

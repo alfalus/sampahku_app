@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::table('user', function (Blueprint $table) {
-            $table->foreign('id_role')->references('id_role')->on('role');
+            $table->foreign('id_role')->references('id_role')->on('role')->onDelete('cascade');
         });
     }
 

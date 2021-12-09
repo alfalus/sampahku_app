@@ -25,30 +25,33 @@ class DatabaseSeeder extends Seeder
         // ]);
         DB::table('role')->insert([
             [
-                'role' => 'bank sampah', //1
-                'deskripsi' => 'user bank sampah'
+                'role' => 'satpel', //1
+                'deskripsi' => 'user satpel'
             ], 
             [
-                'role' => 'rt/rw', //2
+                'role' => 'bank sampah', //2
                 'deskripsi' => 'user rt/rw'
             ], 
             [
-                'role' => 'warga', //3
-                'deskripsi' => 'admin warga'
-            ]]
-        );
+                'role' => 'nasabah', //3
+                'deskripsi' => 'user warga'
+            ],
+            [
+                'role' => 'admin', //4
+                'deskripsi' => 'user admin'
+            ]
+            
+        ]);
 
         User::factory(5)->create();
         
-        DB::table('data_user')->insert([
+        DB::table('satpel')->insert([
+            'id_satpel' => '1',
             'id_user' => '1',
-            'id_relasi_user' => '1',
-            'id_user' => '1',
-            'nama_user' => 'Aldo alfalus',
-            'jenis_kel' => 'L',
-            'ttl' => 'Kediri, 20 juni 1999',
-            'no_hp' => '081233822188',
-            'alamat' => 'Jalan diponegoro, batu, malang',
+            'nama_satpel' => 'Satpel Johar Baru',
+            'alamat' => 'Kecamatan Johar Baru',
+            'no_hp' => '08124212558',
+            'status' => 'active',
         ]);
 
         Sampah::factory(8)->create();

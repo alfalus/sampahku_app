@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\NasabahController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransaksiController;
 
 /*
@@ -26,6 +27,11 @@ Route::get('/', function () {
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/register', [RegisterController::class, function(){
+    return view('register');
+}])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/logout', [LoginController::class, 'logout']);
@@ -38,6 +44,9 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get('/', [ProfilController::class, 'index'])->name('profil');
         Route::get('/edit/{user}', [ProfilController::class, 'detail_user'])->name('edit_user');
         Route::post('/edit/{user}', [ProfilController::class, 'update']);
+        Route::post('/verifikasi', [ProfilController::class, 'verifikasi_email'])->name('verifikasi_email');
+        Route::post('/verifikasi/cek', [ProfilController::class, 'verifikasi_email_cek'])->name('verifikasi_email_cek');
+        Route::post('/ubahpass', [ProfilController::class, 'ubah_pass'])->name('ubah_pass');
     });
 
     //Nasabah

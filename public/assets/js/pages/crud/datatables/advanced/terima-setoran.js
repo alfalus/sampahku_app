@@ -5,7 +5,7 @@ var KTDatatablesAdvancedColumnRendering = function() {
 		var table = $('#kt_datatable');
 
 		// begin first table
-		table.DataTable({
+		var table = $('#kt_datatable').DataTable({
 			responsive: true,
 			paging: true,
 			columnDefs: [
@@ -14,25 +14,26 @@ var KTDatatablesAdvancedColumnRendering = function() {
 					title: 'Nasabah',
 					width: 100,
 					render: function(data, type, full, meta) {
-						var number = KTUtil.getRandomInt(1, 14);
-						var user_img = '100_' + number + '.jpg';
+						// var number = KTUtil.getRandomInt(1, 14);
+						// var user_img = '100_' + number + '.jpg';
 
 						var output;
-						if (number > 8) {
-							output = `
-                                <div class="d-flex align-items-center">
-                                    <div class="symbol symbol-50 flex-shrink-0">
-                                        <img src="assets/media/users/` + user_img + `" alt="photo">
-                                    </div>
-                                    <div class="ml-3">
-                                        <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">` + full[2].split(' ')[0] + `</span>
-                                        <a href="#" class="text-muted text-hover-primary">` + full[3].split(' ',1)[0] + `</a>
-                                    </div>
-                                </div>`;
-						}
+						// if (number > 8) {
+						// 	output = `
+                        //         <div class="d-flex align-items-center">
+                        //             <div class="symbol symbol-50 flex-shrink-0">
+                        //                 <img src="assets/media/users/` + user_img + `" alt="photo">
+                        //             </div>
+                        //             <div class="ml-3">
+                        //                 <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">` + full[2].split(' ')[0] + `</span>
+                        //                 <a href="#" class="text-muted text-hover-primary">` + full[2].split(' ')[1] + `</a>
+                        //             </div>
+                        //         </div>`;
+						// }
 
-						else {
+						// else {
 							var stateNo = KTUtil.getRandomInt(0, 7);
+							console.log(stateNo);
 							var states = [
 								'success',
 								'light',
@@ -48,31 +49,30 @@ var KTDatatablesAdvancedColumnRendering = function() {
 							output = `
                                 <div class="d-flex align-items-center">
                                     <div class="symbol symbol-50 symbol-light-` + state + `" flex-shrink-0">
-                                        <div class="symbol-label font-size-h5">` + full[2].substring(0, 1) + `</div>
+                                        <div class="symbol-label font-size-h5">` + full[0].substring(0, 1) + `</div>
                                     </div>
                                     <div class="ml-3">
-                                        <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">` + full[2].split(' ')[0] + `</span>
-                                        <a href="#" class="text-muted text-hover-primary">` + full[3].split(' ',1)[0] + `</a>
+                                        <span class="text-dark-75 font-weight-bold- line-height-sm d-block pb-2">` + data + `</span>
                                     </div>
                                 </div>`;
-						}
+						// }
 
 						return output;
 					},
 				},
-				{
-					targets: 1,
-					render: function(data, type, full, meta) {
-						return '<a class="text-dark-50 text-hover-primary" ><strong>' + data.split('#')[0] + '</strong><br>' + data.split('#')[1] + '</a>';
-					},
-				},
+				// {
+				// 	targets: 1,
+				// 	render: function(data, type, full, meta) {
+				// 		return '<a class="text-dark-50 text-hover-primary" ><strong>' + data.split('#')[0] + '</strong><br>' + data.split('#')[1] + '</a>';
+				// 	},
+				// },
 				{
 					targets: -1,
-					title: 'Actions',
+					title: 'Aksi',
 					orderable: false,
 					render: function(data, type, full, meta) {
 						return '\
-							<div class="dropdown dropdown-inline">\
+							<!-- <div class="dropdown dropdown-inline">\
 								<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">\
 	                                <i class="la la-cog"></i>\
 	                            </a>\
@@ -83,13 +83,14 @@ var KTDatatablesAdvancedColumnRendering = function() {
 							    		<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-print"></i><span class="nav-text">Print</span></a></li>\
 									</ul>\
 							  	</div>\
-							</div>\
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
+							</div> -->\
+							<button type="button" class="btn btn-success">Edit</button>\
+							<!--<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
 								<i class="la la-edit"></i>\
-							</a>\
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">\
+							</a>-->\
+							<!-- <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">\
 								<i class="la la-trash"></i>\
-							</a>\
+							</a> -->\
 						';
 					},
 				},
@@ -97,36 +98,75 @@ var KTDatatablesAdvancedColumnRendering = function() {
 					targets: 4,
 					render: function(data, type, full, meta) {
 						var status = {
-							1: {'title': 'Pending', 'class': 'label-light-primary'},
-							2: {'title': 'Delivered', 'class': ' label-light-danger'},
-							3: {'title': 'Canceled', 'class': ' label-light-primary'},
-							4: {'title': 'Success', 'class': ' label-light-success'},
-							5: {'title': 'Info', 'class': ' label-light-info'},
-							6: {'title': 'Danger', 'class': ' label-light-danger'},
-							7: {'title': 'Warning', 'class': ' label-light-warning'},
+							1: {'title': 'Tabungan', 'class': 'label-light-primary'},
+							2: {'title': 'Tunai', 'class': ' label-light-success'},
+							// 3: {'title': 'Canceled', 'class': ' label-light-primary'},
+							// 4: {'title': 'Success', 'class': ' label-light-success'},
+							// 5: {'title': 'Info', 'class': ' label-light-info'},
+							// 6: {'title': 'Danger', 'class': ' label-light-danger'},
+							// 7: {'title': 'Warning', 'class': ' label-light-warning'},
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;
 						}
+						if (daa=='cash') {
+							data = 2;
+						} else {
+							data = 1;
+						}
+						console.log(data);
 						return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline">' + status[data].title + '</span>';
 					},
 				},
-				{
-					targets: 5,
-					render: function(data, type, full, meta) {
-						var status = {
-							1: {'title': 'Online', 'state': 'danger'},
-							2: {'title': 'Retail', 'state': 'primary'},
-							3: {'title': 'Direct', 'state': 'success'},
-						};
-						if (typeof status[data] === 'undefined') {
-							return data;
-						}
-						return '<span class="label label-' + status[data].state + ' label-dot mr-2"></span>' +
-							'<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
-					},
-				},
+				// {
+				// 	targets: 5,
+				// 	render: function(data, type, full, meta) {
+				// 		var status = {
+				// 			1: {'title': 'Online', 'state': 'danger'},
+				// 			2: {'title': 'Retail', 'state': 'primary'},
+				// 			3: {'title': 'Direct', 'state': 'success'},
+				// 		};
+				// 		if (typeof status[data] === 'undefined') {
+				// 			return data;
+				// 		}
+				// 		return '<span class="label label-' + status[data].state + ' label-dot mr-2"></span>' +
+				// 			'<span class="font-weight-bold text-' + status[data].state + '">' + status[data].title + '</span>';
+				// 	},
+				// },
 			],
+			// dom: `Bftrip`,
+			buttons: [
+                'print',
+				'copyHtml5',
+				'excelHtml5',
+				'csvHtml5',
+				'pdfHtml5',
+            ],
+		});
+
+		$('#export_print').on('click', function(e) {
+			e.preventDefault();
+			table.button(0).trigger();
+		});
+
+		$('#export_copy').on('click', function(e) {
+			e.preventDefault();
+			table.button(1).trigger();
+		});
+
+		$('#export_excel').on('click', function(e) {
+			e.preventDefault();
+			table.button(2).trigger();
+		});
+
+		$('#export_csv').on('click', function(e) {
+			e.preventDefault();
+			table.button(3).trigger();
+		});
+
+		$('#export_pdf').on('click', function(e) {
+			e.preventDefault();
+			table.button(4).trigger();
 		});
 
 		$('#kt_datatable_search_status').on('change', function() {

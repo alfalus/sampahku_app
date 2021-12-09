@@ -2,23 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Sampah;
+use App\Models\Order_jual;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
     public function index(){
+        $cekRole = Role::where('id_role',auth()->user()->id_role)->first();
+        if ($cekRole->id_role == 1) {
+            $order = Order_jual::
+            select('nama_banksampah as nama','tanggal','total_jual','bobot','deskripsi')
+            ->leftJoin('user as a','a.id_user','=','order_jual.id_user')
+            ->leftJoin('banksampah as b','a.id_user','=','b.id_user')
+            ->where('order_jual.id_relasi_user', auth()->user()->id_user)->get();
+            
+        } else if ($cekRole->id_role == 2) {
+            $order = Order_jual::
+            select('nama_nasabah as nama','tanggal','total_jual','bobot','deskripsi')
+            ->leftJoin('user as a','a.id_user','=','order_jual.id_user')
+            ->leftJoin('nasabah as b','a.id_user','=','b.id_user')
+            ->where('order_jual.id_relasi_user', auth()->user()->id_user)->get();
+
+        } else {
+
+        }
+
+        // dd($order);
+
         return view('transaksi/terima_setoran',[
             'title' => 'Terima Setoran',
             'm_trx' => 'active',
-            'sm_terimaSetoran' => 'active'
+            'sm_terimaSetoran' => 'active',
+            'data' => $order
         ]);
     }
 
     public function add_setoran(){
+        $cekRole = Role::where('id_role',auth()->user()->id_role)->first();
+        if ($cekRole->id_role == 1) {
+            $data = Sampah::select('id_item','nama_kategori','harga_jual_rt as harga')
+            ->orderBy('harga_jual_rt','desc')->get();
+        } else if ($cekRole->id_role == 2) {
+            $data = Sampah::select('id_item','nama_kategori','harga_jual_warga as harga')
+            ->orderBy('harga_jual_warga','desc')->get();
+        } else {
+            $data = Sampah::get()->toArray();
+        }
+
         return view('transaksi/add_setoran',[
             'title' => 'Setoran Baru',
             'm_trx' => 'active',
-            'sm_terimaSetoran' => 'active'
+            'sm_terimaSetoran' => 'active',
+            'data' => $data
         ]);
     }
 
