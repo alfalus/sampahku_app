@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStorageJualSampahsTable extends Migration
+class CreateAksesTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateStorageJualSampahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('storage_jual', function (Blueprint $table) {
-            $table->increments('id_storage');
+        Schema::create('akses_token', function (Blueprint $table) {
+            $table->increments('id_session');
             $table->unsignedInteger('id_user');
-
+            $table->string('token');
+            $table->timestamp('tanggal_dibuat')->nullable();
         });
 
-        Schema::table('storage_jual', function (Blueprint $table) {
+        Schema::table('akses_token', function (Blueprint $table) {
             $table->foreign('id_user')->references('id_user')->on('user');
         });
     }
@@ -31,6 +32,6 @@ class CreateStorageJualSampahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('storage_jual');
+        Schema::dropIfExists('akses_token');
     }
 }

@@ -19,7 +19,7 @@ $user = auth()->user();
 
             <div class="card card-custom gutter-b card-sticky-" id="kt_page_sticky_card">
                 <div class="card-header">
-                    <h3 class="card-title">Setoran Baru</h3>
+                    <h3 class="card-title">Ubah Setoran Bank Sampah</h3>
                     <div class="card-toolbar">
                         {{-- <div class="example-tools justify-content-center"> --}}
 
@@ -37,13 +37,11 @@ $user = auth()->user();
                     <div class="card-body">
                         {{-- <h3 class="font-size-lg text-dark font-weight-bold mb-6">1. Customer Info:</h3> --}}
                         <div class="mb-15">
+
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Pilih Nasabah</label>
-                                <div class="col-lg-9 col-xl-6">
-                                    <select class="form-control form-control-solid selectpicker" name="nasabah" id="nasabah"
-                                        data-live-search="true" title="pilih nasabah">
-                                    </select>
-                                </div>
+                                <label class="col-xl-3 col-lg-3 col-form-label">Penyetor</label>
+                                <label class="col-lg-9 col-xl-6 col-form-label"> <strong> Bank Sampah RT 02</strong></label>
+
                             </div>
 
                             <div class="separator separator-dashed my-10"></div>
@@ -224,6 +222,10 @@ $user = auth()->user();
                                 data-target="#modal_review-">
                                 <i class="flaticon-eye"></i> Review
                             </button>
+                            {{-- <button id="btn_review" class="btn btn-primary w-100px-" data-toggle="modal-"
+                                data-target="#modal_review-">
+                                <i class="flaticon-check"></i> Terima Setoran
+                            </button> --}}
 
                         </div>
                     </div>
@@ -270,8 +272,8 @@ $user = auth()->user();
                 <div class="modal-body">
                     <table class="table">
                         <tr>
-                            <td class="border-top-0 w-5">User</td>
-                            <td class="border-top-0">: <span id="user_setor"></td>
+                            <td class="border-top-0 w-5">Penyetor</td>
+                            <td class="border-top-0">: <span id="user_setor"></span> Bank Sampah RT 02</td>
                         </tr>
                         <tr>
                             <td class="border-top-0 w-50-">Metode</td>
@@ -338,8 +340,8 @@ $user = auth()->user();
                         <i class="ki ki-long-arrow-back icon-sm"></i>Kembali
                     </a>
                     <button type="submit" onclick="document.getElementById('form_add').submit()"
-                        class="btn btn-primary font-weight-bolder px-10- w-100px">
-                        <i class="ki ki-check icon-sm"></i>Setor
+                        class="btn btn-primary font-weight-bolder px-10- w-100px-">
+                        <i class="ki ki-check icon-sm"></i>Terima Setoran
                     </button>
                 </div>
             </div>

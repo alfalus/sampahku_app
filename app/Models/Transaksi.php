@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pemasukan extends Model
+class Transaksi extends Model
 {
     use HasFactory;
-    protected $table = 'pemasukan';
-    protected $primaryKey = 'id_debit_user';
+    protected $table = 'transaksi';
+    protected $primaryKey = 'id_transaksi';
     public $timestamps = false;
 
     protected $guarded = [
-        'id_debit_user'
-    ]; 
+        'id_transaksi'
+    ];
 }

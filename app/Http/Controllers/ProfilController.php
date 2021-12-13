@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Satpel;
-use App\Models\Data_user;
+use App\Models\Nasabah;
 use App\Models\BankSampah;
+use App\Models\Akses_token;
 use Illuminate\Http\Request;
 use App\Mail\VerifikasiEmail;
-use App\Models\Password_reset;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -42,8 +42,10 @@ class ProfilController extends Controller
             ->first();
         } else {
             $data = Nasabah::
-            leftJoin('user as b', 'nasabah.id_user','=','b.id_user')
+            select('nama_nasabah as nama_user','nasabah.jenis_kel','nasabah.tanggal_lahir','nasabah.no_hp','nasabah.alamat','nasabah.status as status','b.email','b.status as active','role','d.nama_banksampah')
+            ->leftJoin('user as b', 'nasabah.id_user','=','b.id_user')
             ->leftJoin('role as c', 'c.id_role', '=', 'b.id_role')
+            ->leftJoin('banksampah as d', 'nasabah.id_banksampah', '=', 'd.id_banksampah')
             ->where('nasabah.id_user', auth()->user()->id_user)
             ->first();
         }
@@ -197,10 +199,10 @@ class ProfilController extends Controller
             Mail::to(auth()->user())->send(new VerifikasiEmail($dataEmail));
             Log::error("Prepare send email");
 
-            $dataIns = new Password_reset;
-            $dataIns->email = $user->email;
+            $dataIns = new Akses_token;
+            $dataIns->id_user = $user->id_user;
             $dataIns->token = $token;
-            $dataIns->created_at = Carbon::now();
+            $dataIns->tanggal_dibuat = Carbon::now();
 
             if ($dataIns->save()) {
                 $response = [
@@ -243,7 +245,7 @@ class ProfilController extends Controller
 
         } else {
             $email = auth()->user()->email;
-            $data = Password_reset::where('email',$email)->latest('created_at')->first();
+            $data = Akses_token::where('id_user',auth()->user()->id_user)->latest('tanggal_dibuat')->first();
             if ($data->token == $request->kode) {
                 $role = auth()->user()->id_role;
                 if ($role == '2') {

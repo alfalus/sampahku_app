@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pemasukan;
+use App\Models\Item_storage;
 use Illuminate\Http\Request;
 
-class PemasukanController extends Controller
+class ItemStorageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class PemasukanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pemasukan  $pemasukan
+     * @param  \App\Models\Item_storage  $item_storage
      * @return \Illuminate\Http\Response
      */
-    public function show(Pemasukan $pemasukan)
+    public function show(Item_storage $item_storage)
     {
         //
     }
@@ -52,10 +52,10 @@ class PemasukanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pemasukan  $pemasukan
+     * @param  \App\Models\Item_storage  $item_storage
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pemasukan $pemasukan)
+    public function edit(Item_storage $item_storage)
     {
         //
     }
@@ -64,10 +64,10 @@ class PemasukanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pemasukan  $pemasukan
+     * @param  \App\Models\Item_storage  $item_storage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pemasukan $pemasukan)
+    public function update(Request $request, Item_storage $item_storage)
     {
         //
     }
@@ -75,10 +75,10 @@ class PemasukanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pemasukan  $pemasukan
+     * @param  \App\Models\Item_storage  $item_storage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pemasukan $pemasukan)
+    public function destroy(Item_storage $item_storage)
     {
         //
     }

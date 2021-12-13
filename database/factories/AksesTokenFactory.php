@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Pengeluaran;
+use App\Models\Akses_token;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PengeluaranFactory extends Factory
+class AksesTokenFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Pengeluaran::class;
+    protected $model = Akses_token::class;
 
     /**
      * Define the model's default state.

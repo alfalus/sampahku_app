@@ -11,126 +11,78 @@ var KTDatatablesAdvancedColumnRendering = function() {
 			columnDefs: [
 				{
 					targets: 0,
-					title: 'Nasabah',
+					className: 'text-center',
+					render: function(data, type, full, meta) {
+						// return '<a class="text-dark-50 text-hover-primary" ><strong>' + data.split('#')[0] + '</strong><br>' + data.split('#')[1] + '</a>';
+						console.log(meta);
+						return meta.row+1;
+					},
+				},
+				{
+					targets: 1,
+					// title: 'Nasabah',
 					width: 100,
 					render: function(data, type, full, meta) {
 						// var number = KTUtil.getRandomInt(1, 14);
-						// var user_img = '100_' + number + '.jpg';
-
-						var output;
-						// if (number > 8) {
-						// 	output = `
-                        //         <div class="d-flex align-items-center">
-                        //             <div class="symbol symbol-50 flex-shrink-0">
-                        //                 <img src="assets/media/users/` + user_img + `" alt="photo">
-                        //             </div>
-                        //             <div class="ml-3">
-                        //                 <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">` + full[2].split(' ')[0] + `</span>
-                        //                 <a href="#" class="text-muted text-hover-primary">` + full[2].split(' ')[1] + `</a>
-                        //             </div>
-                        //         </div>`;
-						// }
-
-						// else {
-							var stateNo = KTUtil.getRandomInt(0, 7);
-							var states = [
-								'success',
-								'light',
-								'danger',
-								'success',
-								'warning',
-								'dark',
-								'primary',
-								'info'];
-
-							var state = states[stateNo];
-
+						var filename = data;
+						var output; 
+						console.log(asset);
+						if (filename) {
 							output = `
                                 <div class="d-flex align-items-center">
-                                    <div class="symbol symbol-50 symbol-light-` + state + `" flex-shrink-0">
-                                        <div class="symbol-label font-size-h5">` + full[0].substring(0, 1) + `</div>
-                                    </div>
-                                    <div class="ml-3">
-                                        <span class="text-dark-75 font-weight-bold- line-height-sm d-block pb-2">` + data + `</span>
+                                    <div class="symbol symbol-100 flex-shrink-0">
+                                        <img src="` + asset + `/` + filename + `" alt="photo">
                                     </div>
                                 </div>`;
-						// }
+						}
 
 						return output;
 					},
 				},
-				// {
-				// 	targets: 1,
-				// 	render: function(data, type, full, meta) {
-				// 		return '<a class="text-dark-50 text-hover-primary" ><strong>' + data.split('#')[0] + '</strong><br>' + data.split('#')[1] + '</a>';
-				// 	},
-				// },
+				
 				{
 					targets: -1,
-					title: 'Aksi',
 					orderable: false,
+					className: 'text-center',
 					render: function(data, type, full, meta) {
 						// console.log(role);
-						if (role == 1) {
-							if (data == 'inprogress') {
-								return `
-								
-								<div class="d-flex">
-									<button type="button" class="btn btn-primary mr-2"> <a href='/transaksi/setoran/ubah'>Ubah</a> </button>\
-									<button type="button" class="btn btn-success">Konfirmasi</button>\
-								
-								</div>
-							`;
-							}
-						} else {
+						
 
-							return '\
-								<!-- <div class="dropdown dropdown-inline">\
-									<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" data-toggle="dropdown">\
-										<i class="la la-cog"></i>\
-									</a>\
-									  <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">\
-										<ul class="nav nav-hoverable flex-column">\
-											<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-edit"></i><span class="nav-text">Edit Details</span></a></li>\
-											<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-leaf"></i><span class="nav-text">Update Status</span></a></li>\
-											<li class="nav-item"><a class="nav-link" href="#"><i class="nav-icon la la-print"></i><span class="nav-text">Print</span></a></li>\
-										</ul>\
-									  </div>\
-								</div> -->\
-								<button type="button" class="btn btn-success">Edit</button>\
-								<!--<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Edit details">\
-									<i class="la la-edit"></i>\
-								</a>-->\
-								<!-- <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">\
-									<i class="la la-trash"></i>\
-								</a> -->\
-							';
-						}
+						return `
+							
+							 <div class="mb-2">
+								<button type="button" class="btn btn-primary w-100 btn_edit"><i class="fa fa-edit"></i>Edit</button>
+							</div>
+							<div>
+								<button type="button" class="btn btn-danger w-100 btn_delete"><i class="fa fa-trash"></i>Delete</button>
+							</div> 
+							
+						`;
 					},
 				},
-				{
-					targets: 4,
-					render: function(data, type, full, meta) {
-						var status = {
-							1: {'title': 'Tabungan', 'class': 'label-light-primary'},
-							2: {'title': 'Tunai', 'class': ' label-light-success'},
-							// 3: {'title': 'Canceled', 'class': ' label-light-primary'},
-							// 4: {'title': 'Success', 'class': ' label-light-success'},
-							// 5: {'title': 'Info', 'class': ' label-light-info'},
-							// 6: {'title': 'Danger', 'class': ' label-light-danger'},
-							// 7: {'title': 'Warning', 'class': ' label-light-warning'},
-						};
-						// if (typeof status[data] === 'undefined') {
-						// 	return data;
-						// }
-						if (data=='tunai') {
-							data = 2;
-						} else {
-							data = 1;
-						}
-						return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline">' + status[data].title + '</span>';
-					},
-				},
+				// {
+				// 	targets: 4,
+				// 	render: function(data, type, full, meta) {
+				// 		var status = {
+				// 			1: {'title': 'Tabungan', 'class': 'label-light-primary'},
+				// 			2: {'title': 'Tunai', 'class': ' label-light-success'},
+				// 			// 3: {'title': 'Canceled', 'class': ' label-light-primary'},
+				// 			// 4: {'title': 'Success', 'class': ' label-light-success'},
+				// 			// 5: {'title': 'Info', 'class': ' label-light-info'},
+				// 			// 6: {'title': 'Danger', 'class': ' label-light-danger'},
+				// 			// 7: {'title': 'Warning', 'class': ' label-light-warning'},
+				// 		};
+				// 		// if (typeof status[data] === 'undefined') {
+				// 		// 	return data;
+				// 		// }
+				// 		if (data=='tunai') {
+				// 			data = 2;
+				// 		} else {
+				// 			data = 1;
+				// 		}
+				// 		return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline">' + status[data].title + '</span>';
+				// 	},
+				// },
 				// {
 				// 	targets: 5,
 				// 	render: function(data, type, full, meta) {

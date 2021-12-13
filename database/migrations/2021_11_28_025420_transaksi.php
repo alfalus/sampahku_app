@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePenarikanSaldosTable extends Migration
+class Transaksi extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,20 @@ class CreatePenarikanSaldosTable extends Migration
      */
     public function up()
     {
-        Schema::create('penarikan_saldo', function (Blueprint $table) {
-            $table->increments('id_penarikan');
+        Schema::create('transaksi', function (Blueprint $table) {
+            $table->increments('id_transaksi');
             $table->unsignedInteger('id_user');
             $table->unsignedInteger('id_relasi_user');
-            $table->timestamp('tanggal_penarikan');
-            $table->integer('uang_ditarik');
+            $table->string('tipe_transaksi');
+            $table->integer('total_nominal');
+            $table->string('metode_pembayaran');
+            $table->timestamp('tanggal')->nullable();
             $table->string('status');
+            $table->string('deskripsi')->nullable();
 
         });
 
-        Schema::table('penarikan_saldo', function (Blueprint $table) {
+        Schema::table('transaksi', function (Blueprint $table) {
             $table->foreign('id_user')->references('id_user')->on('user');
             $table->foreign('id_relasi_user')->references('id_user')->on('user');
         });
@@ -36,6 +39,6 @@ class CreatePenarikanSaldosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penarikan_saldo');
+        Schema::dropIfExists('transaksi');
     }
 }

@@ -14,7 +14,7 @@ class Sampah extends Migration
     public function up()
     {
         Schema::create('sampah', function (Blueprint $table) {
-            $table->increments('id_item');
+            $table->increments('id_sampah');
             $table->string('nama_kategori');
             $table->integer('harga_jual_warga');
             $table->integer('harga_jual_rt');

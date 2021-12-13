@@ -47,6 +47,9 @@
                     </a>
                 </li>
 
+                @php
+                    $user = auth()->user();
+                @endphp
                 {{-- Transaksi --}}
                 <li class="menu-item menu-item-submenu @isset($m_trx) menu-item-open menu-item-here- @endisset"
                     aria-haspopup="true" data-menu-toggle="hover">
@@ -64,27 +67,43 @@
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Terima Setoran</span>
+                                    @if ($user->id_role != 3)
+                                        <span class="menu-text">Terima Setoran</span>
+                                    @else
+                                        <span class="menu-text">Setoran</span>
+                                    @endif
                                 </a>
                             </li>
                         </ul>
-                        <ul class="menu-subnav">
-                            <li class="menu-item @isset($sm_trx) menu-item-active @endisset" aria-haspopup="true">
-                                <a href="{{ url('/transaksi/jual-setoran') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Jual Setoran</span>
-                                </a>
-                            </li>
-                        </ul>
+
+                        @if ($user->id_role == 2)
+                            <ul class="menu-subnav">
+                                <li class="menu-item @isset($sm_jualSetoran) menu-item-active @endisset"
+                                    aria-haspopup="true">
+                                    <a href="{{ url('/transaksi/jual-setoran') }}" class="menu-link">
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text">Jual Setoran</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        @endif
+
                         <ul class="menu-subnav">
                             <li class="menu-item @isset($sm_trx) menu-item-active @endisset" aria-haspopup="true">
                                 <a href="{{ url('/transaksi/pembelian-warga') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Pembelian</span>
+
+                                    <span class="menu-text">
+                                        @if ($user->id_role == 1 || $user->id_role == 2)
+                                            Terima Pembelian
+                                        @else
+                                            Pembelian
+                                        @endif
+                                    </span>
                                 </a>
                             </li>
                         </ul>
@@ -103,23 +122,25 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             {{-- @if (auth()->user()->id_role == 1) --}}
-                            <li class="menu-item @isset($sm_pencairanNasabah) menu-item-active @endisset"
-                                aria-haspopup="true">
-                                <a href="{{ url('/user') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Pencairan Nasabah</span>
-                                </a>
-                            </li>
+                            @if (auth()->user()->id_role != 3)
+                                <li class="menu-item @isset($sm_pencairanNasabah) menu-item-active @endisset"
+                                    aria-haspopup="true">
+                                    <a href="{{ url('/pencairan/nasabah') }}" class="menu-link">
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text">Pencairan Nasabah</span>
+                                    </a>
+                                </li>
+                            @endif
                             {{-- @elseif (auth()->user()->id_role == 2) --}}
                             <li class="menu-item @isset($sm_pencairanPribadi) menu-item-active @endisset"
                                 aria-haspopup="true">
-                                <a href="{{ url('/user') }}" class="menu-link">
+                                <a href="{{ url('/pencairan/pribadi') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Pencairan Pribadi</span>
+                                    <span class="menu-text">Pencairan Dana</span>
                                 </a>
                             </li>
                             {{-- @else --}}
@@ -152,82 +173,85 @@
                     </div>
                 </li>
 
-                {{-- Inventory --}}
-                <li class="menu-item menu-item-submenu @isset($m_inventory) menu-item-open menu-item-here- @endisset"
-                    aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-                        <i class="menu-icon fas fa-folder"></i>
-                        <span class="menu-text">Inventori</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-                            {{-- @if (auth()->user()->id_role == 1)
-                                <li class="menu-item @isset($sm_terdaftar) menu-item-active @endisset"
+                @if (auth()->user()->id_role != 3)
+                    {{-- Inventory --}}
+                    <li class="menu-item menu-item-submenu @isset($m_inventory) menu-item-open menu-item-here- @endisset"
+                        aria-haspopup="true" data-menu-toggle="hover">
+                        <a href="javascript:;" class="menu-link menu-toggle">
+                            <i class="menu-icon fas fa-folder"></i>
+                            <span class="menu-text">Inventori</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="menu-submenu">
+                            <i class="menu-arrow"></i>
+                            <ul class="menu-subnav">
+                                {{-- @if (auth()->user()->id_role == 1) --}}
+                                <li class="menu-item @isset($sm_sampahSetoran) menu-item-active @endisset"
                                     aria-haspopup="true">
-                                    <a href="{{ url('/user') }}" class="menu-link">
+                                    <a href="{{ url('/inventory/setoran') }}" class="menu-link">
                                         <i class="menu-bullet menu-bullet-dot">
                                             <span></span>
                                         </i>
-                                        <span class="menu-text">RT/RW Terdaftar</span>
+                                        <span class="menu-text">Sampah Setoran</span>
                                     </a>
                                 </li>
-                            @elseif (auth()->user()->id_role == 2)
-                                <li class="menu-item @isset($sm_terdaftar) menu-item-active @endisset"
+                                {{-- @elseif (auth()->user()->id_role == 2) --}}
+                                <li class="menu-item @isset($sm_daftarItem) menu-item-active @endisset"
                                     aria-haspopup="true">
-                                    <a href="{{ url('/user') }}" class="menu-link">
+                                    <a href="{{ url('/inventory/item') }}" class="menu-link">
                                         <i class="menu-bullet menu-bullet-dot">
                                             <span></span>
                                         </i>
-                                        <span class="menu-text">Nasabah Terdaftar</span>
+                                        <span class="menu-text">List Item</span>
                                     </a>
                                 </li>
-                            @else
-                            @endif --}}
+                                {{-- @else
+                                @endif --}}
 
-                        </ul>
-                    </div>
-                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
 
                 {{-- Manajemen user --}}
-                <li class="menu-item menu-item-submenu @isset($m_user) menu-item-open menu-item-here- @endisset"
-                    aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-                        <i class="menu-icon fas fa-users"></i>
-                        <span class="menu-text">Manajemen Pengguna</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-                            @if (auth()->user()->id_role == 1)
-                                <li class="menu-item @isset($sm_terdaftar) menu-item-active @endisset"
-                                    aria-haspopup="true">
-                                    <a href="{{ url('/user') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">RT/RW Terdaftar</span>
-                                    </a>
-                                </li>
-                            @elseif (auth()->user()->id_role == 2)
-                                <li class="menu-item @isset($sm_terdaftar) menu-item-active @endisset"
-                                    aria-haspopup="true">
-                                    <a href="{{ url('/user') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Nasabah Terdaftar</span>
-                                    </a>
-                                </li>
-                            @else
-                            @endif
+                @if (auth()->user()->id_role != 3)
+                    <li class="menu-item menu-item-submenu @isset($m_user) menu-item-open menu-item-here- @endisset"
+                        aria-haspopup="true" data-menu-toggle="hover">
+                        <a href="javascript:;" class="menu-link menu-toggle">
+                            <i class="menu-icon fas fa-users"></i>
+                            <span class="menu-text">Manajemen Pengguna</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="menu-submenu">
+                            <i class="menu-arrow"></i>
+                            <ul class="menu-subnav">
+                                @if (auth()->user()->id_role == 1)
+                                    <li class="menu-item @isset($sm_terdaftar) menu-item-active @endisset"
+                                        aria-haspopup="true">
+                                        <a href="{{ url('/user') }}" class="menu-link">
+                                            <i class="menu-bullet menu-bullet-dot">
+                                                <span></span>
+                                            </i>
+                                            <span class="menu-text">RT/RW Terdaftar</span>
+                                        </a>
+                                    </li>
+                                @elseif (auth()->user()->id_role == 2)
+                                    <li class="menu-item @isset($sm_terdaftar) menu-item-active @endisset"
+                                        aria-haspopup="true">
+                                        <a href="{{ url('/user') }}" class="menu-link">
+                                            <i class="menu-bullet menu-bullet-dot">
+                                                <span></span>
+                                            </i>
+                                            <span class="menu-text">Nasabah Terdaftar</span>
+                                        </a>
+                                    </li>
+                                @else
+                                @endif
 
-                        </ul>
-                    </div>
-                </li>
-
+                            </ul>
+                        </div>
+                    </li>
+                @endif
 
 
 

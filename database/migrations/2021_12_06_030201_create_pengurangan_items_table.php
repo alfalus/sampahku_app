@@ -15,16 +15,16 @@ class CreatePenguranganItemsTable extends Migration
     {
         Schema::create('pengurangan_item', function (Blueprint $table) {
             $table->increments('id_pengurangan');
-            $table->unsignedInteger('id_user');
-            $table->unsignedInteger('id_item');
+            // $table->unsignedInteger('id_item_storage');
+            $table->unsignedInteger('id_sampah');
             $table->integer('total_pengurangan');
-            $table->string('detail');
+            $table->string('deskripsi')->nullable();
 
         });
 
         Schema::table('pengurangan_item', function (Blueprint $table) {
-            $table->foreign('id_user')->references('id_user')->on('user');
-            $table->foreign('id_item')->references('id_item')->on('sampah');
+            // $table->foreign('id_item_storage')->references('id_item_storage')->on('item_storage');
+            $table->foreign('id_sampah')->references('id_sampah')->on('sampah');
         });
     }
 

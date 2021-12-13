@@ -61,11 +61,13 @@ class ApiController extends Controller
         $cekRole = Role::where('id_role',$id)->first();
         if ($cekRole) {
             if ($cekRole->id_role == 1) {
-                $query = Sampah::select('id_item','nama_kategori','harga_jual_rt as harga')
-                ->orderBy('harga_jual_rt','desc')->get();
+                $query = Sampah::select('id_sampah','nama_kategori','harga_jual_rt as harga')
+                ->orderBy('nama_kategori','asc')
+                ->get();
             } else if ($cekRole->id_role == 2) {
-                $query = Sampah::select('id_item','nama_kategori','harga_jual_warga as harga')
-                ->orderBy('harga_jual_warga','desc')->get();
+                $query = Sampah::select('id_sampah','nama_kategori','harga_jual_warga as harga')
+                ->orderBy('nama_kategori','asc')
+                ->get();
             } else {
                 $query = Sampah::get();
             }

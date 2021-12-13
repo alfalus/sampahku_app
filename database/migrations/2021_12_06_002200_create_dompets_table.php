@@ -15,19 +15,16 @@ class CreateDompetsTable extends Migration
     {
         Schema::create('dompet', function (Blueprint $table) {
             $table->increments('id_dompet');
-            $table->unsignedInteger('id_kredit_user');
-            $table->unsignedInteger('id_debit_user');
-            $table->integer('uang_keluar');
-            $table->integer('uang_masuk');
             $table->unsignedInteger('id_penarikan_user');
-            $table->integer('total_semua_penarikan');
+            $table->unsignedInteger('id_transaksi');
+            $table->integer('total_penarikan');
+            $table->integer('total_transaksi');
 
         });
 
         Schema::table('dompet', function (Blueprint $table) {
-            $table->foreign('id_kredit_user')->references('id_kredit_user')->on('pengeluaran');
-            $table->foreign('id_debit_user')->references('id_debit_user')->on('pemasukan');
             $table->foreign('id_penarikan_user')->references('id_penarikan_user')->on('riwayat_penarikan');
+            $table->foreign('id_transaksi')->references('id_transaksi')->on('transaksi');
         });
     }
 

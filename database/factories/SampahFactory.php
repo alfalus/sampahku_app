@@ -23,7 +23,7 @@ class SampahFactory extends Factory
     public function definition()
     {
         return [
-            'id_item' => $this->faker->randomNumber(2, true),
+            'id_sampah' => $this->faker->randomNumber(2, true),
             'nama_kategori' => $this->faker->word(),
             'harga_jual_warga' => $this->faker->randomNumber(4, true),
             'harga_jual_rt' => $this->faker->randomNumber(4, true)

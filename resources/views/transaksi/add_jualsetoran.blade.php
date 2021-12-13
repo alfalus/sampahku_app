@@ -1,7 +1,3 @@
-@php
-$user = auth()->user();
-@endphp
-
 @extends('layouts.template')
 
 @section('title')
@@ -38,13 +34,23 @@ $user = auth()->user();
                         {{-- <h3 class="font-size-lg text-dark font-weight-bold mb-6">1. Customer Info:</h3> --}}
                         <div class="mb-15">
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Pilih Nasabah</label>
+                                <label class="col-xl-3 col-lg-3 col-form-label">Penyetor</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <select class="form-control form-control-solid selectpicker" name="nasabah" id="nasabah"
-                                        data-live-search="true" title="pilih nasabah">
-                                    </select>
+                                    <input type="text" name="penyetor" id="penyetor"
+                                        class="form-control form-control-lg- form-control-solid " disabled
+                                        value="{{ $user->nama_banksampah }}" />
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Penerima</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <input type="text" name="penerima" id="penerima"
+                                        class="form-control form-control-lg- form-control-solid " disabled
+                                        value="{{ $user->nama_satpel }}" />
+                                </div>
+                            </div>
+
+                            {{-- {{ dd($user) }} --}}
 
                             <div class="separator separator-dashed my-10"></div>
                             <h3 class="font-size-lg text-dark-75 font-weight-bold mb-10">Sampah yang Disetorkan
@@ -236,7 +242,7 @@ $user = auth()->user();
             <div class="card card-custom card-stretch gutter-b sticky" id="" data-sticky="true" data-sticky-for="1023"
                 data-sticky-class="sticky" data-margin-top="140px">
                 <div class="card-header border-1">
-                    <h3 class="card-title">Harga Jual Warga</h3>
+                    <h3 class="card-title">Harga Jual RT/RW</h3>
                 </div>
 
                 <div class="card-body scroll scroll-pull" data-scroll="true" data-wheel-propagation="true"
@@ -270,8 +276,12 @@ $user = auth()->user();
                 <div class="modal-body">
                     <table class="table">
                         <tr>
-                            <td class="border-top-0 w-5">User</td>
+                            <td class="border-top-0 w-5">Penyetor</td>
                             <td class="border-top-0">: <span id="user_setor"></td>
+                        </tr>
+                        <tr>
+                            <td class="border-top-0 w-5">Penerima</td>
+                            <td class="border-top-0">: <span id="user_penerima"></td>
                         </tr>
                         <tr>
                             <td class="border-top-0 w-50-">Metode</td>
@@ -363,7 +373,7 @@ $user = auth()->user();
             });
 
             $.ajax({
-                url: 'api/user/getNasabah/{!! $user->id_user !!}',
+                url: 'api/user/getNasabah/{!! auth()->user()->id_user !!}',
                 type: 'get',
                 success: function(result) {
                     if (result.status == 'ok') {
@@ -382,7 +392,7 @@ $user = auth()->user();
             });
 
             $.ajax({
-                url: 'api/user/getPrice/{!! $user->id_role !!}',
+                url: 'api/user/getPrice/1',
                 type: 'get',
                 success: function(result) {
                     if (result.status == 'ok') {
@@ -443,7 +453,8 @@ $user = auth()->user();
                 } else {
 
                     $("#tabel_review > tbody").empty();
-                    $("#user_setor").html($("#nasabah").text());
+                    $("#user_setor").html($("#penyetor").val());
+                    $("#user_penerima").html($("#penerima").val());
                     $("#metode_bayar").html($("input[name=tipe_bayar]:checked").val());
 
                     var grandTotal = 0;

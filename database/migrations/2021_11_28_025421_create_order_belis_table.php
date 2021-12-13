@@ -15,20 +15,15 @@ class CreateOrderBelisTable extends Migration
     {
         Schema::create('order_beli', function (Blueprint $table) {
             $table->increments('id_order_beli');
-            $table->unsignedInteger('id_user');
-            $table->unsignedInteger('id_relasi_user');
+            $table->unsignedInteger('id_transaksi_beli');
             $table->unsignedInteger('id_produk');
             $table->integer('qty');
-            $table->integer('total_beli');
-            $table->timestamp('tanggal');
-            $table->string('status');
-            $table->string('deskripsi');
+            $table->integer('sub_total');
 
         });
 
         Schema::table('order_beli', function (Blueprint $table) {
-            $table->foreign('id_user')->references('id_user')->on('user');
-            // $table->foreign('id_relasi_user')->references('id_relasi_user')->on('penarikan_saldo');
+            $table->foreign('id_transaksi_beli')->references('id_transaksi')->on('transaksi');
             $table->foreign('id_produk')->references('id_produk')->on('produk');
         });
     }

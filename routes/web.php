@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\PencairanController;
 use App\Http\Controllers\TransaksiController;
 
 /*
@@ -61,9 +63,30 @@ Route::group(['middleware' => ['auth']], function(){
     // Transaksi
     Route::prefix('/transaksi')->group(function(){
         Route::get('/setoran', [TransaksiController::class, 'index'])->name('terima_setoran');
-        Route::get('/setoran/add', [TransaksiController::class, 'add_setoran'])->name('add_setoran');
+        Route::get('/setoran/add', [TransaksiController::class, 'view_add_setoran'])->name('view_add_setoran');
+        Route::post('/setoran/add', [TransaksiController::class, 'add_setoran'])->name('add_setoran');
+        Route::get('/setoran/ubah', [TransaksiController::class, 'view_ubah_setoran'])->name('view_ubah_setoran');
+        Route::post('/setoran/ubah', [TransaksiController::class, 'ubah_setoran'])->name('ubah_setoran');
+        Route::get('/jual-setoran', [TransaksiController::class, 'view_jual_setoran'])->name('view_jual_setoran');
+        Route::get('/jual-setoran/add', [TransaksiController::class, 'add_jualsetoran'])->name('add_jualsetoran');
     });
 
+    // Pencairan
+    Route::prefix('/pencairan')->group(function(){
+        Route::get('/nasabah', [PencairanController::class, 'nasabah'])->name('pencairan.nasabah');
+        Route::get('/pribadi', [PencairanController::class, 'pribadi'])->name('pencairan.pribadi');
+    });
+
+    // Pencairan
+    Route::prefix('/inventory')->group(function(){
+        Route::get('/setoran', [InventoryController::class, 'setoran'])->name('inventory.sampah_setoran');
+        Route::get('/item', [InventoryController::class, 'itemList'])->name('inventory.item');
+        Route::get('/item/add', [InventoryController::class, 'view_add_item'])->name('inventory.view_add_item');
+        Route::post('/item/add', [InventoryController::class, 'add_item'])->name('inventory.add_item');
+        Route::get('/item/edit', [InventoryController::class, 'view_edit_item'])->name('inventory.view_edit_item');
+        Route::post('/item/edit', [InventoryController::class, 'edit_item'])->name('inventory.edit_item');
+        Route::get('/item/delete/{id}', [InventoryController::class, 'itemList'])->name('inventory.add_item');
+    });
 
 
 

@@ -132,17 +132,27 @@ $user = auth()->user();
                                     <span class="form-text font-weight-bolder">{{ ucwords($data->role) }}</span>
 
                                 @else
+                                    <span class="form-text font-weight-bolder">{{ ucwords($data->role) }}</span>
 
                                 @endif
                             </div>
                         </div>
-                        @if (auth()->user()->id_role != 1)
+                        @if (auth()->user()->id_role == 2)
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label text-left">Satpel </label>
                                 <div class="col-lg-6 col-form-label">
                                     <span class="form-text font-weight-bolder">{{ ucwords($data->nama_satpel) }}</span>
                                 </div>
                             </div>
+                        @elseif (auth()->user()->id_role==3)
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-form-label text-left">Bank Sampah </label>
+                                <div class="col-lg-6 col-form-label">
+                                    <span
+                                        class="form-text font-weight-bolder">{{ ucwords($data->nama_banksampah) }}</span>
+                                </div>
+                            </div>
+                        @else
                         @endif
 
                     </div>

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengeluaran;
+use App\Models\Akses_token;
 use Illuminate\Http\Request;
 
-class PengeluaranController extends Controller
+class AksesTokenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class PengeluaranController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pengeluaran  $pengeluaran
+     * @param  \App\Models\Akses_token  $akses_token
      * @return \Illuminate\Http\Response
      */
-    public function show(Pengeluaran $pengeluaran)
+    public function show(Akses_token $akses_token)
     {
         //
     }
@@ -52,10 +52,10 @@ class PengeluaranController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pengeluaran  $pengeluaran
+     * @param  \App\Models\Akses_token  $akses_token
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pengeluaran $pengeluaran)
+    public function edit(Akses_token $akses_token)
     {
         //
     }
@@ -64,10 +64,10 @@ class PengeluaranController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pengeluaran  $pengeluaran
+     * @param  \App\Models\Akses_token  $akses_token
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pengeluaran $pengeluaran)
+    public function update(Request $request, Akses_token $akses_token)
     {
         //
     }
@@ -75,10 +75,10 @@ class PengeluaranController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pengeluaran  $pengeluaran
+     * @param  \App\Models\Akses_token  $akses_token
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pengeluaran $pengeluaran)
+    public function destroy(Akses_token $akses_token)
     {
         //
     }

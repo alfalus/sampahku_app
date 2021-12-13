@@ -15,21 +15,16 @@ class CreateOrderJualsTable extends Migration
     {
         Schema::create('order_jual', function (Blueprint $table) {
             $table->increments('id_order_jual');
-            $table->unsignedInteger('id_user');
-            $table->unsignedInteger('id_relasi_user');
-            $table->unsignedInteger('id_item');
+            $table->unsignedInteger('id_transaksi_jual');
+            $table->unsignedInteger('id_sampah');
             $table->integer('bobot');
-            $table->integer('total_jual');
-            $table->timestamp('tanggal');
-            $table->string('status');
-            $table->string('deskripsi');
+            $table->integer('sub_total');
 
         });
 
         Schema::table('order_jual', function (Blueprint $table) {
-            $table->foreign('id_user')->references('id_user')->on('user');
-            $table->foreign('id_relasi_user')->references('id_user')->on('user');
-            $table->foreign('id_item')->references('id_item')->on('sampah');
+            $table->foreign('id_transaksi_jual')->references('id_transaksi')->on('transaksi');
+            $table->foreign('id_sampah')->references('id_sampah')->on('sampah');
         });
     }
 
