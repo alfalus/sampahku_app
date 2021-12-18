@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Nasabah;
 use App\Models\BankSampah;
 use Illuminate\Http\Request;
+use App\Models\Storage_jual_sampah;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,6 +81,11 @@ class RegisterController extends Controller
                     $detail->tanggal_update = Carbon::now();
                     $detail->status = 'waiting confirmation';
                     $detail->save();
+                    
+                    $storage = new Storage_jual_sampah;
+                    $storage->id_user = $user->id_user;
+                    $storage->save();
+
                     $msg = "Akun bank sampah berhasil dibuat";
 
                 } elseif ($role == '3') { //warga
